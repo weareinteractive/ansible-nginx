@@ -1,0 +1,8 @@
+---
+
+- hosts: all
+  roles:
+    - franklinkim.nginx
+  vars:
+    nginx_latest: yes
+    nginx_remove_default: yes

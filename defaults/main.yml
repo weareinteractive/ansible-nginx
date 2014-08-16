@@ -1,0 +1,26 @@
+---
+# For more information about default variables see:
+# http://www.ansibleworks.com/docs/playbooks_variables.html#id26
+
+# use repo to install latest git
+nginx_latest: no
+# lastest git repo path
+nginx_latest_repo: ppa:nginx/stable
+# run as a less privileged user for security reasons.
+nginx_user: www-data
+nginx_worker_processes: 'auto'
+nginx_worker_connections: 768
+# default settings
+nginx_sendfile: 'on'
+nginx_tcp_nopush: 'on'
+nginx_tcp_nodelay: 'on'
+nginx_keepalive_timeout: 54
+nginx_types_hash_max_size: 2048
+nginx_server_tokens: 'off'
+# remove default site
+nginx_remove_default: no
+# start on boot
+nginx_service_enabled: yes
+# current state: started, stopped
+nginx_service_state: started
+
