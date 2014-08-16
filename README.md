@@ -61,6 +61,7 @@ apache2_sites: []
   roles: 
     - franklinkim.nginx
   vars:
+    nginx_worker_processes: 1
     nginx_remove_default: yes
 ```
 
