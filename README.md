@@ -35,7 +35,7 @@ $ git clone https://github.com/weareinteractive/ansible-nginx.git
 ```
 # run as a less privileged user for security reasons.
 nginx_user: www-data
-nginx_worker_processes: 'auto'
+nginx_worker_processes: auto
 nginx_worker_connections: 768
 # default settings
 nginx_sendfile: 'on'
