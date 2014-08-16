@@ -1,0 +1,25 @@
+---
+
+- name: Enabling sites
+  file: >
+    src=/etc/nginx/sites-available/{{ item.id }}
+    dest=/etc/nginx/sites-enabled/{{ item.id }}
+    state=link
+  when: item.state is not defined or item.state == 'present'
+  notify: restart nginx
+  with_items: nginx_sites
+  tags:
+    - web
+    - nginx
+
+- name: Disabling sites
+  file: >
+    src=/etc/nginx/sites-available/{{ item.id }}
+    dest=/etc/nginx/sites-enabled/{{ item.id }}
+    state=absent
+  when: item.state is defined and item.state == 'absent'
+  notify: restart nginx
+  with_items: nginx_sites
+  tags:
+    - web
+    - nginx

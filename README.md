@@ -1,7 +1,7 @@
 # Ansible Nginx Role
 
-[![Build Status](https://travis-ci.org/weareinteractive/ansible-role-nginx.png?branch=master)](https://travis-ci.org/weareinteractive/ansible-role-nginx)
-[![Stories in Ready](https://badge.waffle.io/weareinteractive/ansible-role-nginx.svg?label=ready&title=Ready)](http://waffle.io/weareinteractive/ansible-role-nginx)
+[![Build Status](https://travis-ci.org/weareinteractive/ansible-nginx.png?branch=master)](https://travis-ci.org/weareinteractive/ansible-nginx)
+[![Stories in Ready](https://badge.waffle.io/weareinteractive/ansible-nginx.svg?label=ready&title=Ready)](http://waffle.io/weareinteractive/ansible-nginx)
 
 > `nginx` is an [ansible](http://www.ansible.com) role which: 
 > 
@@ -27,16 +27,12 @@ $ arm install franklinkim.nginx
 Using `git`:
 
 ```
-$ git clone https://github.com/weareinteractive/ansible-role-nginx.git
+$ git clone https://github.com/weareinteractive/ansible-nginx.git
 ```
 
 ## Variables
 
 ```
-# use repo to install latest git
-nginx_latest: no
-# lastest git repo path
-nginx_latest_repo: ppa:nginx/stable
 # run as a less privileged user for security reasons.
 nginx_user: www-data
 nginx_worker_processes: 'auto'
@@ -54,6 +50,8 @@ nginx_remove_default: no
 nginx_service_enabled: yes
 # current state: started, stopped
 nginx_service_state: started
+# enabled/disabled sites
+apache2_sites: []
 ```
 
 ## Example playbook
@@ -63,15 +61,14 @@ nginx_service_state: started
   roles: 
     - franklinkim.nginx
   vars:
-    nginx_latest: yes
     nginx_remove_default: yes
 ```
 
 ## Testing
 
 ```
-$ git clone https://github.com/weareinteractive/ansible-role-nginx.git
-$ cd ansible-role-nginx
+$ git clone https://github.com/weareinteractive/ansible-nginx.git
+$ cd ansible-nginx
 $ vagrant up
 ```
 

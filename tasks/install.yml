@@ -1,14 +1,5 @@
 ---
 
-- name: Adding apt repository
-  apt_repository: >
-    repo={{ nginx_latest_repo }}
-    update_cache=yes
-  when: nginx_latest
-  tags:
-    - web
-    - nginx
-
 - name: Installing packages
   apt: >
     pkg={{ item }}
