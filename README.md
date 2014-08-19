@@ -9,6 +9,8 @@
 > * configures nginx
 > * enables/disables sites
 > * optionally removes default host
+> * adds rules
+> * configures service
 
 ## Installation
 
@@ -32,9 +34,12 @@ $ git clone https://github.com/weareinteractive/ansible-nginx.git
 
 ## Variables
 
+Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
+
 ```
 # run as a less privileged user for security reasons.
 nginx_user: www-data
+# auto or a number
 nginx_worker_processes: auto
 nginx_worker_connections: 768
 # default settings
@@ -51,8 +56,30 @@ nginx_service_enabled: yes
 # current state: started, stopped
 nginx_service_state: started
 # enabled/disabled sites
-apache2_sites: []
+nginx_sites: []
 ```
+
+## Handlers
+
+These are the handlers that are defined in `handlers/main.yml`.
+
+* `restart nginx` 
+
+## Rules
+
+In addition there will be copied some configuration rules to `/etc/nginx/rules`:
+
+* cache_busting.conf  
+* cors_web_fonts.conf 
+* gzip.conf           
+* no_transform.conf   
+* ssl.conf
+* cors_ajax.con       
+* expires.conf        
+* gzip_static.conf    
+* security.conf
+
+These can be included into your site definitions.
 
 ## Example playbook
 
@@ -63,6 +90,15 @@ apache2_sites: []
   vars:
     nginx_worker_processes: 1
     nginx_remove_default: yes
+```
+
+## Notes
+
+You can use `franklinkim.apt` to add a repository to get the latest `nginx`:
+
+```
+apt_repositories:
+  - 'ppa:nginx/stable'
 ```
 
 ## Testing

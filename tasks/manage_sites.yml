@@ -11,6 +11,7 @@
   tags:
     - web
     - nginx
+    - manage_sites
 
 - name: Disabling sites
   file: >
@@ -23,3 +24,4 @@
   tags:
     - web
     - nginx
+    - manage_sites

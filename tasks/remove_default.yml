@@ -8,6 +8,7 @@
   tags:
     - web
     - nginx
+    - remove_default
 
 - name: Removing default host
   file: >
@@ -17,3 +18,4 @@
   tags:
     - web
     - nginx
+    - remove_default
