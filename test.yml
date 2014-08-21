@@ -1,8 +1,27 @@
 ---
 
-- hosts: all
+- host: all
   roles:
     - franklinkim.nginx
   vars:
-    nginx_remove_default: yes
     nginx_worker_processes: 1
+    nginx_remove_default: yes
+    htpasswd:
+      - name: foobar
+        users:
+          - { name: foobar, password: foobar }
+    openssl_self_signed:
+      - { name: 'foobar.local', country: 'DE', state: 'Bavaria', city: 'Munich', organization: 'Foo Bar', email: 'foo@bar.com' }
+    nginx_html:
+      - id: foobar
+        add_webroot: yes
+        name: foobar.local
+        ssl:
+          key_name: foobar.local
+          cert_name: foobar.local
+        rules:
+          - gzip
+          - security
+        auth:
+          name: Foo Bar
+          file: foobar

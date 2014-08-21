@@ -7,6 +7,7 @@
 > 
 > * installs nginx
 > * configures nginx
+> * creates sites
 > * enables/disables sites
 > * optionally removes default host
 > * adds rules
@@ -59,6 +60,45 @@ nginx_service_state: started
 nginx_sites: []
 ```
 
+A site might be defined through:
+
+```
+# site id (required)
+id: foo
+# server name (required)
+name: foo.com
+# ip to listen to
+ip: '*'
+# port to listen to
+port: 80
+# state: present | absent
+state: present
+# create the /var/www/[id]/htdocs folder
+add_webroot: no
+# /etc/nginx/rules/[rule].conf to include
+rules: []
+# list of server aliases
+aliases: []
+# list of server redirects
+redirects: []
+# enable ssl
+ssl:
+  # redirect http to https
+  only: no
+  # port to listen to
+  port: 443
+  # @see franklinkim.openssl
+  key_name: mykey
+  cert_name: mycert
+# enable auth
+auth:
+  # @see franklinkim.htpasswd
+  name: foo
+  file: foo
+# custom string to append to the site
+append: false
+```
+
 ## Handlers
 
 These are the handlers that are defined in `handlers/main.yml`.
@@ -90,6 +130,25 @@ These can be included into your site definitions.
   vars:
     nginx_worker_processes: 1
     nginx_remove_default: yes
+    htpasswd:
+      - name: foobar
+        users:
+          - { name: foobar, password: foobar }
+    openssl_self_signed:
+      - { name: 'foobar.local', country: 'DE', state: 'Bavaria', city: 'Munich', organization: 'Foo Bar', email: 'foo@bar.com' }
+    nginx_html:
+      - id: foobar
+        add_webroot: yes
+        name: foobar.local
+        ssl:
+          key_name: foobar.local
+          cert_name: foobar.local
+        rules:
+          - gzip
+          - security
+        auth:
+          name: Foo Bar
+          file: foobar
 ```
 
 ## Notes

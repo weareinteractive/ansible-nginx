@@ -1,6 +1,28 @@
 ---
 # For more information about default variables see:
 # http://www.ansibleworks.com/docs/playbooks_variables.html#id26
+#
+# nginx_sites:
+#   - id: foo (required)
+#     name: foo.com (required)
+#     ip: '*'
+#     port: 80
+#     state: present
+#     add_webroot: no
+#     template: path/to/template.j2
+#     aliases: []
+#     redirects: []
+#     ssl:
+#       only: no
+#       port: 443
+#       key_name: mykey
+#       cert_name: mycert
+#     rules: []
+#     auth:
+#       name: foo
+#       file: foo
+#     append: ''
+#
 
 # run as a less privileged user for security reasons.
 nginx_user: www-data
