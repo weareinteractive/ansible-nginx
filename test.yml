@@ -1,6 +1,6 @@
 ---
 
-- host: all
+- hosts: all
   roles:
     - franklinkim.nginx
   vars:
@@ -12,7 +12,7 @@
           - { name: foobar, password: foobar }
     openssl_self_signed:
       - { name: 'foobar.local', country: 'DE', state: 'Bavaria', city: 'Munich', organization: 'Foo Bar', email: 'foo@bar.com' }
-    nginx_html:
+    nginx_sites:
       - id: foobar
         add_webroot: yes
         name: foobar.local

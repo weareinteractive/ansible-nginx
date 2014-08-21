@@ -33,6 +33,11 @@ Using `git`:
 $ git clone https://github.com/weareinteractive/ansible-nginx.git
 ```
 
+## Dependencies
+
+* [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
+* [franklinkim.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
+
 ## Variables
 
 Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
@@ -75,6 +80,8 @@ port: 80
 state: present
 # create the /var/www/[id]/htdocs folder
 add_webroot: no
+# path to your own site template
+template: path/to/template.j2
 # /etc/nginx/rules/[rule].conf to include
 rules: []
 # list of server aliases
@@ -83,8 +90,6 @@ aliases: []
 redirects: []
 # enable ssl
 ssl:
-  # redirect http to https
-  only: no
   # port to listen to
   port: 443
   # @see franklinkim.openssl
@@ -124,7 +129,7 @@ These can be included into your site definitions.
 ## Example playbook
 
 ```
-- host: all
+- hosts: all
   roles: 
     - franklinkim.nginx
   vars:
@@ -136,7 +141,7 @@ These can be included into your site definitions.
           - { name: foobar, password: foobar }
     openssl_self_signed:
       - { name: 'foobar.local', country: 'DE', state: 'Bavaria', city: 'Munich', organization: 'Foo Bar', email: 'foo@bar.com' }
-    nginx_html:
+    nginx_sites:
       - id: foobar
         add_webroot: yes
         name: foobar.local

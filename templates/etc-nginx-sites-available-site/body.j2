@@ -4,9 +4,7 @@ server {
 
   # --- listen ----------------------------------------------------------------
 
-  {% if not item.ssl is defined or not item.ssl.only|default(false) %}
   listen {{ item.ip|default('*') }}:{{item.port|default(80)}};
-  {% endif %}
   {% if item.ssl is defined %}
   listen {{ item.ip|default('*') }}:{{item.ssl.port|default(443)}} ssl;
   {% endif %}
