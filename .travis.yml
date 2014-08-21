@@ -7,8 +7,8 @@ before_install:
  - sudo apt-get install -qq python-apt python-pycurl
 install:
   - pip install ansible
-  - ansible-galaxy install franklinkim.nginx
   - ansible-galaxy install franklinkim.openssl
+  - ansible-galaxy install franklinkim.htpasswd
 script:
   - echo localhost > inventory
   - ln -s ansible-nginx ../franklinkim.nginx
