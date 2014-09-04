@@ -33,9 +33,19 @@ server {
 
   # --- locations -------------------------------------------------------------
 
+  {% if item.proxy_pass is defined %}
+  
+  location {{ item.proxy_pass.location }} {
+      proxy_pass {{ item.proxy_pass.target }};
+  }
+    
+  {% else %}
+  
   location / {
     try_files $uri $uri/ =404;
   }
+  
+  {% endif %}
 
   # --- logging ---------------------------------------------------------------
 
