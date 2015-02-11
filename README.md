@@ -45,8 +45,8 @@ Here is a list of all the default variables for this role, which are also availa
 ```
 # run as a less privileged user for security reasons.
 nginx_user: www-data
-# auto or a number
-nginx_worker_processes: auto
+# number or auto
+nginx_worker_processes: 1
 nginx_worker_connections: 768
 # default settings
 nginx_sendfile: 'on'

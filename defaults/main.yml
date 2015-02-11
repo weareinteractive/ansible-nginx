@@ -25,7 +25,7 @@
 
 # run as a less privileged user for security reasons.
 nginx_user: www-data
-# auto or a number
+# number or auto
 nginx_worker_processes: 1
 nginx_worker_connections: 768
 # default settings
