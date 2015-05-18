@@ -1,8 +1,30 @@
 ---
 
 - include: install.yml
+  tags:
+    - web
+    - nginx
+    - install
+    - nginx-install
+
 - include: config.yml
-- include: rules.yml
-- include: remove_default.yml
-- include: manage_sites.yml
+  tags:
+    - web
+    - nginx
+    - config
+    - nginx-config
+
+- include: manage.yml
+  when: nginx_sites | length
+  tags:
+    - web
+    - nginx
+    - manage
+    - nginx-manage
+
 - include: service.yml
+  tags:
+    - web
+    - nginx
+    - service
+    - nginx-service
