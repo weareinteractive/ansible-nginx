@@ -1,6 +1,4 @@
 # {{ ansible_managed }}
-# nginx Configuration File
-# http://wiki.nginx.org/Configuration
 
 # Run as a less privileged user for security reasons.
 user {{ nginx_user }};
@@ -13,66 +11,42 @@ user {{ nginx_user }};
 # The maximum number of connections for Nginx is calculated by:
 # max_clients = worker_processes * worker_connections
 worker_processes {{ nginx_worker_processes }};
+pid /run/nginx.pid;
 
+# Determines whether nginx should become a daemon
+daemon {{ nginx_daemon }};
 
 events {
   # When you need > 8000 * cpu_cores connections, you start optimizing your OS,
   # and this is probably the point at which you hire people who are smarter than
   # you, as this is *a lot* of requests.
   worker_connections {{ nginx_worker_connections }};
+  # multi_accept on;
 }
 
-# Default log file
-# (this is only used when you don't override access_log on a server{} level)
-error_log 	/var/log/nginx/error.log warn;
-pid        /run/nginx.pid;
-
 http {
+
   ##
   # Basic Settings
   ##
 
-  # If we set index here, we won't have to anywhere else
-  index index.html index.htm;
-
-  # Speed up file transfers by using sendfile() to copy directly
-  # between descriptors rather than using read()/write().
   sendfile {{ nginx_sendfile }};
-
-  # Tell Nginx not to send out partial frames; this increases throughput
-  # since TCP frames are filled up before being sent out. (adds TCP_CORK)
   tcp_nopush {{ nginx_tcp_nopush }};
-
-  # Tell Nginx to enable the Nagle buffering algorithm for TCP packets, which
-  # collates several smaller packets together into one larger packet, thus saving
-  # bandwidth at the cost of a nearly imperceptible increase to latency. (removes TCP_NODELAY)
   tcp_nodelay {{ nginx_tcp_nodelay }};
-
-  # How long to allow each connection to stay idle; longer values are better
-  # for each individual client, particularly for SSL, but means that worker
-  # connections are tied up longer. (Default: 65)
   keepalive_timeout {{ nginx_keepalive_timeout }};
-
   types_hash_max_size {{ nginx_types_hash_max_size }};
-
-  # Hide nginx version information.
   server_tokens {{ nginx_server_tokens }};
 
-  # Define the MIME types for files.
-  include       /etc/nginx/mime.types;
-  default_type  application/octet-stream;
+  server_names_hash_bucket_size {{ nginx_server_names_hash_bucket_size }};
+  # server_name_in_redirect off;
+
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
 
   ##
   # Logging Settings
   ##
 
-  # Format to use in log files
-  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                    '$status $body_bytes_sent "$http_referer" '
-                    '"$http_user_agent" "$http_x_forwarded_for"';
-
-  # Default log file
-  # (this is only used when you don't override access_log on a server{} level)
   access_log /var/log/nginx/access.log;
   error_log /var/log/nginx/error.log;
 
@@ -83,12 +57,25 @@ http {
   gzip on;
   gzip_disable "msie6";
 
-  # gzip_vary on;
-  # gzip_proxied any;
-  # gzip_comp_level 6;
-  # gzip_buffers 16 8k;
-  # gzip_http_version 1.1;
-  # gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_comp_level 6;
+  gzip_buffers 16 8k;
+  gzip_min_length 10;
+  gzip_http_version 1.1;
+  gzip_types
+    text/plain
+    text/css
+    application/json
+    application/x-javascript
+    application/javascript
+    text/xml
+    application/xml
+    application/xml+rss
+    text/javascript
+    image/png
+    image/gif
+    image/jpeg;
 
   ##
   # nginx-naxsi config
@@ -106,11 +93,10 @@ http {
 
   #passenger_root /usr;
   #passenger_ruby /usr/bin/ruby;
-
   ##
   # Virtual Host Configs
   ##
 
-	include /etc/nginx/conf.d/*;
-	include /etc/nginx/sites-enabled/*;
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-enabled/*;
 }

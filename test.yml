@@ -1,7 +1,10 @@
 ---
 
 - hosts: all
+  sudo: yes
   roles:
+    - franklinkim.openssl
+    - franklinkim.htpasswd
     - franklinkim.nginx
   vars:
     nginx_worker_processes: 1

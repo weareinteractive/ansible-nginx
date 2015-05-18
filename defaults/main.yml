@@ -23,18 +23,24 @@
 #     append: ''
 #
 
+# apt repository
+nginx_repo: ppa:nginx/stable
+# package name (version)
+nginx_package: nginx
 # run as a less privileged user for security reasons.
 nginx_user: www-data
 # number or auto
 nginx_worker_processes: 1
-nginx_worker_connections: 768
+nginx_worker_connections: 1024
 # default settings
 nginx_sendfile: 'on'
 nginx_tcp_nopush: 'on'
 nginx_tcp_nodelay: 'on'
-nginx_keepalive_timeout: 54
+nginx_keepalive_timeout: 15
 nginx_types_hash_max_size: 2048
+nginx_server_names_hash_bucket_size: 128
 nginx_server_tokens: 'off'
+nginx_daemon: 'on'
 # remove default site
 nginx_remove_default: no
 # start on boot
@@ -43,3 +49,5 @@ nginx_service_enabled: yes
 nginx_service_state: started
 # enabled/disabled sites
 nginx_sites: []
+# add rules
+nginx_add_rules: yes

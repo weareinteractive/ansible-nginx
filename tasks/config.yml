@@ -1,14 +1,35 @@
 ---
 
 - name: Configuring nginx
-  template: >
-    src=etc-nginx-nginx.conf.j2
-    dest=/etc/nginx/nginx.conf
-    owner=root
-    group=root
-    mode=644
+  template:
+    src: etc-nginx-nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: "0644"
   notify: restart nginx
-  tags:
-    - web
-    - nginx
-    - config
+
+- name: Disabling default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  when: nginx_remove_default
+  notify: restart nginx
+
+- name: Removing default host
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/nginx/sites-available/default
+    - /var/www/html
+  when: nginx_remove_default
+
+- name: Adding rules
+  copy:
+    src: etc-nginx-rules/
+    dest: /etc/nginx/rules/
+    owner: root
+    group: root
+    mode: "0644"
+  when: nginx_add_rules
