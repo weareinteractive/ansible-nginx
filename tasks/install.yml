@@ -1,12 +1,11 @@
 ---
 
+- name: Adding APT repository
+  apt_repository:
+    repo: "{{ nginx_repo }}"
+    update_cache: yes
+
 - name: Installing packages
-  apt: >
-    pkg={{ item }}
-    state=present
-  with_items:
-    - nginx
-  tags:
-    - web
-    - nginx
-    - install
+  apt:
+    pkg: "{{ nginx_package }}"
+    state: present
