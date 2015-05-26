@@ -13,9 +13,6 @@ user {{ nginx_user }};
 worker_processes {{ nginx_worker_processes }};
 pid /run/nginx.pid;
 
-# Determines whether nginx should become a daemon
-daemon {{ nginx_daemon }};
-
 events {
   # When you need > 8000 * cpu_cores connections, you start optimizing your OS,
   # and this is probably the point at which you hire people who are smarter than

@@ -87,7 +87,6 @@ nginx_keepalive_timeout: 65
 nginx_types_hash_max_size: 2048
 nginx_server_names_hash_bucket_size: 128
 nginx_server_tokens: 'off'
-nginx_daemon: 'on'
 # remove default site
 nginx_remove_default: no
 # start on boot
