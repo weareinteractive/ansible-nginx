@@ -20,3 +20,17 @@ after_dependencies: |
 
   * [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
   * [franklinkim.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
+after_handlers: |
+  ## Rules
+
+  If `nginx_add_rules` is `yes`, it will copy some configuration rules to `/etc/nginx/rules`:
+
+  * cache_busting.conf
+  * cors_web_fonts.conf
+  * gzip.conf
+  * no_transform.conf
+  * ssl.conf
+  * cors_ajax.con
+  * expires.conf
+  * gzip_static.conf
+  * security.conf
