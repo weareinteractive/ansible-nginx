@@ -1,11 +1,11 @@
-# Ansible Nginx Role
+# Ansible franklinkim.nginx role
 
 [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-nginx.svg)](https://travis-ci.org/weareinteractive/ansible-nginx)
-[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.nginx-blue.svg)](https://galaxy.ansible.com/franklinkim/nginx/)
+[![Galaxy](http://img.shields.io/badge/galaxy-weareinteractive.nginx-blue.svg)](https://galaxy.ansible.com/weareinteractive/nginx)
 [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
 [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
 
-> `nginx` is an [ansible](http://www.ansible.com) role which:
+> `franklinkim.nginx` is an [Ansible](http://www.ansible.com) role which:
 >
 > * installs nginx
 > * configures nginx
@@ -19,26 +19,25 @@
 
 Using `ansible-galaxy`:
 
-```
+```shell
 $ ansible-galaxy install franklinkim.nginx
 ```
 
 Using `requirements.yml`:
 
-```
+```yaml
 - src: franklinkim.nginx
 ```
 
 Using `git`:
 
-```
+```shell
 $ git clone https://github.com/weareinteractive/ansible-nginx.git franklinkim.nginx
 ```
 
 ## Dependencies
 
-* Ansible 1.9
-
+* Ansible >= 2.0
 ## Related (see example)
 
 * [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
@@ -48,7 +47,9 @@ $ git clone https://github.com/weareinteractive/ansible-nginx.git franklinkim.ng
 
 Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
 
-```
+```yaml
+---
+
 # nginx_sites:
 #   - id: foo (required)
 #     name: foo.com (required)
@@ -78,12 +79,12 @@ nginx_package: nginx
 nginx_user: www-data
 # number or auto
 nginx_worker_processes: 1
-nginx_worker_connections: 768
+nginx_worker_connections: 1024
 # default settings
 nginx_sendfile: 'on'
 nginx_tcp_nopush: 'on'
 nginx_tcp_nodelay: 'on'
-nginx_keepalive_timeout: 65
+nginx_keepalive_timeout: 15
 nginx_types_hash_max_size: 2048
 nginx_server_names_hash_bucket_size: 128
 nginx_server_tokens: 'off'
@@ -97,13 +98,21 @@ nginx_service_state: started
 nginx_sites: []
 # add rules
 nginx_add_rules: yes
+
 ```
 
 ## Handlers
 
 These are the handlers that are defined in `handlers/main.yml`.
 
-* `restart nginx`
+```yaml
+---
+
+- name: restart nginx
+  service: name=nginx state=restarted
+  when: nginx_service_state != 'stopped'
+
+```
 
 ## Rules
 
@@ -119,14 +128,16 @@ If `nginx_add_rules` is `yes`, it will copy some configuration rules to `/etc/ng
 * gzip_static.conf
 * security.conf
 
-These can be included into your site definitions.
+## Usage
 
-## Example playbook
+This is an example playbook:
 
-```
+```yaml
+---
+
 - hosts: all
-  sudo: yes
   roles:
+    - weareinteractive.apt
     - franklinkim.openssl
     - franklinkim.htpasswd
     - franklinkim.nginx
@@ -152,24 +163,33 @@ These can be included into your site definitions.
         auth:
           name: Foo Bar
           file: foobar
+
 ```
+
 
 ## Testing
 
-```
+```shell
 $ git clone https://github.com/weareinteractive/ansible-nginx.git
 $ cd ansible-nginx
-$ vagrant up
+$ make test
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+*Note: To update the `README.md` file please install and run `ansible-role`:*
+
+```shell
+$ gem install ansible-role
+$ ansible-role docgen
+```
 
 ## License
 Copyright (c) We Are Interactive under the MIT license.
