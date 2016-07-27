@@ -1,7 +1,5 @@
 ---
-# For more information about default variables see:
-# http://www.ansibleworks.com/docs/playbooks_variables.html#id26
-#
+
 # nginx_sites:
 #   - id: foo (required)
 #     name: foo.com (required)

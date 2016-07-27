@@ -1,8 +1,8 @@
 ---
 
 - hosts: all
-  sudo: yes
   roles:
+    - weareinteractive.apt
     - franklinkim.openssl
     - franklinkim.htpasswd
     - franklinkim.nginx

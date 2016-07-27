@@ -1,0 +1,36 @@
+---
+galaxy_name: franklinkim.nginx
+github_user: weareinteractive
+github_name: ansible-nginx
+badges: |
+  [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-nginx.svg)](https://travis-ci.org/weareinteractive/ansible-nginx)
+  [![Galaxy](http://img.shields.io/badge/galaxy-weareinteractive.nginx-blue.svg)](https://galaxy.ansible.com/weareinteractive/nginx)
+  [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
+  [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
+description: |
+  > * installs nginx
+  > * configures nginx
+  > * creates sites
+  > * enables/disables sites
+  > * optionally removes default host
+  > * adds rules
+  > * configures service
+after_dependencies: |
+  ## Related (see example)
+
+  * [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
+  * [franklinkim.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
+after_handlers: |
+  ## Rules
+
+  If `nginx_add_rules` is `yes`, it will copy some configuration rules to `/etc/nginx/rules`:
+
+  * cache_busting.conf
+  * cors_web_fonts.conf
+  * gzip.conf
+  * no_transform.conf
+  * ssl.conf
+  * cors_ajax.con
+  * expires.conf
+  * gzip_static.conf
+  * security.conf
