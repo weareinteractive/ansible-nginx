@@ -1,7 +1,7 @@
 # Ansible Nginx Role
 
 [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-nginx.svg)](https://travis-ci.org/weareinteractive/ansible-nginx)
-[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.supervisor-blue.svg)](https://galaxy.ansible.com/list#/roles/1922)
+[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.nginx-blue.svg)](https://galaxy.ansible.com/franklinkim/nginx/)
 [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
 [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
 
