@@ -5,7 +5,7 @@
     dest: "/var/www/{{ item.id }}/htdocs"
     state: directory
   when: item.add_webroot is defined and item.add_webroot == true
-  with_items: nginx_sites
+  with_items: "{{ nginx_sites }}"
 
 - name: Configuring sites
   template:
@@ -14,7 +14,7 @@
     owner: root
     group: root
     mode: "0644"
-  with_items: nginx_sites
+  with_items: "{{ nginx_sites }}"
   notify: restart nginx
 
 - name: Enabling sites
@@ -23,7 +23,7 @@
     dest: "/etc/nginx/sites-enabled/{{ item.id }}"
     state: link
   when: item.state is not defined or item.state == 'present'
-  with_items: nginx_sites
+  with_items: "{{ nginx_sites }}"
   notify: restart nginx
 
 - name: Disabling sites
@@ -32,5 +32,5 @@
     dest: "/etc/nginx/sites-enabled/{{ item.id }}"
     state: absent
   when: item.state is defined and item.state == 'absent'
-  with_items: nginx_sites
+  with_items: "{{ nginx_sites }}"
   notify: restart nginx

@@ -1,0 +1,22 @@
+---
+galaxy_name: franklinkim.nginx
+github_user: weareinteractive
+github_name: ansible-nginx
+badges: |
+  [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-nginx.svg)](https://travis-ci.org/weareinteractive/ansible-nginx)
+  [![Galaxy](http://img.shields.io/badge/galaxy-weareinteractive.nginx-blue.svg)](https://galaxy.ansible.com/weareinteractive/nginx)
+  [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
+  [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
+description: |
+  > * installs nginx
+  > * configures nginx
+  > * creates sites
+  > * enables/disables sites
+  > * optionally removes default host
+  > * adds rules
+  > * configures service
+after_dependencies: |
+  ## Related (see example)
+
+  * [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
+  * [franklinkim.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
