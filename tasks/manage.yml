@@ -15,7 +15,7 @@
     group: root
     mode: "0644"
   with_items: "{{ nginx_sites }}"
-  notify: restart nginx
+  notify: reload nginx
 
 - name: Enabling sites
   file:
@@ -24,7 +24,7 @@
     state: link
   when: item.state is not defined or item.state == 'present'
   with_items: "{{ nginx_sites }}"
-  notify: restart nginx
+  notify: reload nginx
 
 - name: Disabling sites
   file:
