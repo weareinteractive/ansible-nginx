@@ -1,3 +1,14 @@
+<a name="1.4.0"></a>
+## 1.4.0 (2016-08-15)
+
+
+#### Features
+
+*   readd restart handler ([6cb85d7d](https://github.com/weareinteractive/ansible-nginx/commit/6cb85d7d08d206a5d35fef833ac6974228a62dc7))
+*   use reload instead of restart ([8dd51d3f](https://github.com/weareinteractive/ansible-nginx/commit/8dd51d3fe4dfbf5a6b843562d5f4995810dd121f))
+
+
+
 <a name="1.3.0"></a>
 ## 1.3.0 (2016-07-27)
 

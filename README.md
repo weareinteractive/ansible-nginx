@@ -112,6 +112,11 @@ These are the handlers that are defined in `handlers/main.yml`.
   service: name=nginx state=restarted
   when: nginx_service_state != 'stopped'
 
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+  when: nginx_service_state != 'stopped'
+
 ```
 
 ## Rules
