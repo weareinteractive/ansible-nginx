@@ -1,11 +1,11 @@
-# Ansible franklinkim.nginx role
+# Ansible weareinteractive.nginx role
 
 [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-nginx.svg)](https://travis-ci.org/weareinteractive/ansible-nginx)
 [![Galaxy](http://img.shields.io/badge/galaxy-weareinteractive.nginx-blue.svg)](https://galaxy.ansible.com/weareinteractive/nginx)
 [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
 [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-nginx.svg)](https://github.com/weareinteractive/ansible-nginx)
 
-> `franklinkim.nginx` is an [Ansible](http://www.ansible.com) role which:
+> `weareinteractive.nginx` is an [Ansible](http://www.ansible.com) role which:
 >
 > * installs nginx
 > * configures nginx
@@ -20,19 +20,19 @@
 Using `ansible-galaxy`:
 
 ```shell
-$ ansible-galaxy install franklinkim.nginx
+$ ansible-galaxy install weareinteractive.nginx
 ```
 
 Using `requirements.yml`:
 
 ```yaml
-- src: franklinkim.nginx
+- src: weareinteractive.nginx
 ```
 
 Using `git`:
 
 ```shell
-$ git clone https://github.com/weareinteractive/ansible-nginx.git franklinkim.nginx
+$ git clone https://github.com/weareinteractive/ansible-nginx.git weareinteractive.nginx
 ```
 
 ## Dependencies
@@ -40,8 +40,8 @@ $ git clone https://github.com/weareinteractive/ansible-nginx.git franklinkim.ng
 * Ansible >= 2.0
 ## Related (see example)
 
-* [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
-* [franklinkim.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
+* [weareinteractive.openssl](https://github.com/weareinteractive/ansible-openssl)
+* [weareinteractive.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
 
 ## Variables
 
@@ -143,9 +143,9 @@ This is an example playbook:
 - hosts: all
   roles:
     - weareinteractive.apt
-    - franklinkim.openssl
-    - franklinkim.htpasswd
-    - franklinkim.nginx
+    - weareinteractive.openssl
+    - weareinteractive.htpasswd
+    - weareinteractive.nginx
   vars:
     nginx_worker_processes: 1
     nginx_remove_default: yes

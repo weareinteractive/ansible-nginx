@@ -1,5 +1,5 @@
 ---
-galaxy_name: franklinkim.nginx
+galaxy_name: weareinteractive.nginx
 github_user: weareinteractive
 github_name: ansible-nginx
 badges: |
@@ -18,8 +18,8 @@ description: |
 after_dependencies: |
   ## Related (see example)
 
-  * [franklinkim.openssl](https://github.com/weareinteractive/ansible-openssl)
-  * [franklinkim.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
+  * [weareinteractive.openssl](https://github.com/weareinteractive/ansible-openssl)
+  * [weareinteractive.htpasswd](https://github.com/weareinteractive/ansible-htpasswd)
 after_handlers: |
   ## Rules
 
