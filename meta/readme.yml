@@ -1,4 +1,5 @@
 ---
+
 galaxy_name: weareinteractive.nginx
 github_user: weareinteractive
 github_name: ansible-nginx
@@ -15,6 +16,10 @@ description: |
   > * optionally removes default host
   > * adds rules
   > * configures service
+
+  **Note:**
+
+  > Since Ansible Galaxy supports [organization](https://www.ansible.com/blog/ansible-galaxy-2-release) now, this role has moved from `franklinkim.nginx` to `weareinteractive.nginx`!
 after_dependencies: |
   ## Related (see example)
 
