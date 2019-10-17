@@ -1,20 +1,20 @@
 ---
 
-- include: install.yml
+- import_tasks: install.yml
   tags:
     - web
     - nginx
     - install
     - nginx-install
 
-- include: config.yml
+- import_tasks: config.yml
   tags:
     - web
     - nginx
     - config
     - nginx-config
 
-- include: manage.yml
+- import_tasks: manage.yml
   when: nginx_sites | length
   tags:
     - web
@@ -22,7 +22,7 @@
     - manage
     - nginx-manage
 
-- include: service.yml
+- import_tasks: service.yml
   tags:
     - web
     - nginx
