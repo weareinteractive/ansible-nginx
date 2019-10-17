@@ -3,9 +3,9 @@
 - hosts: all
   roles:
     - weareinteractive.apt
-    - franklinkim.openssl
-    - franklinkim.htpasswd
-    - franklinkim.nginx
+    - weareinteractive.openssl
+    - weareinteractive.htpasswd
+    - weareinteractive.nginx
   vars:
     nginx_worker_processes: 1
     nginx_remove_default: yes
