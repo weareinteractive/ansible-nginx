@@ -22,7 +22,7 @@
 #
 
 # apt repository
-nginx_repo: ppa:nginx/stable
+nginx_repo: "deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
 # package name (version)
 nginx_package: nginx
 # run as a less privileged user for security reasons.

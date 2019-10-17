@@ -6,6 +6,6 @@
     update_cache: yes
 
 - name: Installing packages
-  apt:
-    pkg: "{{ nginx_package }}"
+  package:
+    name: "{{ nginx_package }}"
     state: present
