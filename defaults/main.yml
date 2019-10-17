@@ -23,6 +23,8 @@
 
 # apt repository
 nginx_repo: "deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
+# apt repository key
+nginx_repo_key: ABF5BD827BD9BF62
 # package name (version)
 nginx_package: nginx
 # run as a less privileged user for security reasons.

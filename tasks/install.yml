@@ -1,5 +1,11 @@
 ---
 
+- name: Importing APT key
+  apt_key:
+    id: "{{ nginx_repo_key }}"
+    keyserver: keyserver.ubuntu.com
+    state: present
+
 - name: Adding APT repository
   apt_repository:
     repo: "{{ nginx_repo }}"
