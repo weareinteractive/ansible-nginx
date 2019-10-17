@@ -15,6 +15,10 @@
 > * adds rules
 > * configures service
 
+**Note:**
+
+> Since Ansible Galaxy supports [organization](https://www.ansible.com/blog/ansible-galaxy-2-release) now, this role has moved from `franklinkim.nginx` to `weareinteractive.nginx`!
+
 ## Installation
 
 Using `ansible-galaxy`:
@@ -37,7 +41,7 @@ $ git clone https://github.com/weareinteractive/ansible-nginx.git weareinteracti
 
 ## Dependencies
 
-* Ansible >= 2.0
+* Ansible >= 2.4
 ## Related (see example)
 
 * [weareinteractive.openssl](https://github.com/weareinteractive/ansible-openssl)
@@ -72,7 +76,7 @@ Here is a list of all the default variables for this role, which are also availa
 #
 
 # apt repository
-nginx_repo: ppa:nginx/stable
+nginx_repo: "deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
 # package name (version)
 nginx_package: nginx
 # run as a less privileged user for security reasons.
@@ -141,20 +145,27 @@ This is an example playbook:
 ---
 
 - hosts: all
+  become: true
   roles:
     - weareinteractive.apt
     - weareinteractive.openssl
     - weareinteractive.htpasswd
     - weareinteractive.nginx
   vars:
-    nginx_worker_processes: 1
-    nginx_remove_default: yes
     htpasswd:
       - name: foobar
         users:
           - { name: foobar, password: foobar }
+    openssl_generate_csr: yes
     openssl_self_signed:
-      - { name: 'foobar.local', country: 'DE', state: 'Bavaria', city: 'Munich', organization: 'Foo Bar', email: 'foo@bar.com' }
+      - name: fooboar.local
+        subject:
+           C: DE
+           ST: Bavaria
+           L: Munich
+           O: Foo Bar Inc
+           CN: foobar.local
+           emailAddress: null@foobar.local
     nginx_sites:
       - id: foobar
         add_webroot: yes
@@ -168,6 +179,11 @@ This is an example playbook:
         auth:
           name: Foo Bar
           file: foobar
+    nginx_worker_processes: 1
+    nginx_remove_default: yes
+    # do not start service as we're running in docker
+    nginx_service_state: stopped
+    nginx_service_enabled: no
 
 ```
 
