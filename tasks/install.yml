@@ -1,5 +1,10 @@
 ---
 
+- name: Installing dependencies
+  apt:
+    pkg: "{{ nginx_dependencies }}"
+    state: present
+
 - name: Importing APT key
   apt_key:
     id: "{{ nginx_repo_key }}"

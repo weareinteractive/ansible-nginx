@@ -21,6 +21,10 @@
 #     append: ''
 #
 
+# dependencies packages to install package
+nginx_dependencies:
+  - ca-certificates
+  - gnupg2
 # apt repository
 nginx_repo: "deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
 # apt repository key
