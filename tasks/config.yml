@@ -9,6 +9,14 @@
     mode: "0644"
   notify: reload nginx
 
+- name: Ensure sites-enabled folder
+  file:
+    path: /etc/nginx/sites-enabled
+    state: directory
+    group: root
+    owner: root
+    mode: "0644"
+
 - name: Disabling default site
   file:
     path: /etc/nginx/sites-enabled/default
