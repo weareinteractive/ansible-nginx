@@ -1,3 +1,23 @@
+<a name="1.5.0"></a>
+## 1.5.0 (2019-10-18)
+
+
+#### Features
+
+*   rename role ([95bb2d51](https://github.com/weareinteractive/ansible-nginx/commit/95bb2d51398f6e61c6330d2378a38e29438569c3))
+*   ensure config folders ([e27ebc86](https://github.com/weareinteractive/ansible-nginx/commit/e27ebc86c522fff78c088b84ca6e411ec93854e4))
+*   add depencies ([299f3844](https://github.com/weareinteractive/ansible-nginx/commit/299f38446f76359ca85d75db91cb7adcaca22f2e))
+*   ensure sites-enabled folder ([731d3546](https://github.com/weareinteractive/ansible-nginx/commit/731d354692b6c98af0412a8e97b89888cbb46dc2))
+*   bump ansible min version ([67b2c245](https://github.com/weareinteractive/ansible-nginx/commit/67b2c245f3f4594595fb281b9352295daa861e9a))
+*   update apt repository ([95a17572](https://github.com/weareinteractive/ansible-nginx/commit/95a17572b23145f68ee9376d4604093d967ad7af))
+*   use import_tasks ([0f2ad490](https://github.com/weareinteractive/ansible-nginx/commit/0f2ad4906914081ac244c707f7b3b221382edd79))
+
+#### Bug Fixes
+
+*   add apt key ([fe5c5ca6](https://github.com/weareinteractive/ansible-nginx/commit/fe5c5ca66aaa7d6dc6e64be7f67b22636fd99637))
+
+
+
 <a name="1.4.0"></a>
 ## 1.4.0 (2016-08-15)
 
