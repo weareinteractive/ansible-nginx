@@ -9,11 +9,22 @@
     mode: "0644"
   notify: reload nginx
 
+- name: Ensure folders
+  file:
+    path: "{{ item }}"
+    state: directory
+    group: root
+    owner: root
+    mode: "0644"
+  with_items:
+    - /etc/nginx/sites-enabled
+    - /etc/nginx/sites-available
+
 - name: Disabling default site
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
-  when: nginx_remove_default
+  when: "{{ nginx_remove_default }}"
   notify: reload nginx
 
 - name: Removing default host
@@ -23,7 +34,7 @@
   with_items:
     - /etc/nginx/sites-available/default
     - /var/www/html
-  when: nginx_remove_default
+  when: "{{ nginx_remove_default }}"
 
 - name: Adding rules
   copy:
@@ -32,4 +43,4 @@
     owner: root
     group: root
     mode: "0644"
-  when: nginx_add_rules
+  when: "{{ nginx_add_rules }}"

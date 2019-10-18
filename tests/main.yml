@@ -1,20 +1,27 @@
 ---
 
 - hosts: all
+  become: yes
   roles:
     - weareinteractive.apt
-    - franklinkim.openssl
-    - franklinkim.htpasswd
-    - franklinkim.nginx
+    - weareinteractive.openssl
+    - weareinteractive.htpasswd
+    - weareinteractive.nginx
   vars:
-    nginx_worker_processes: 1
-    nginx_remove_default: yes
     htpasswd:
       - name: foobar
         users:
           - { name: foobar, password: foobar }
+    openssl_generate_csr: yes
     openssl_self_signed:
-      - { name: 'foobar.local', country: 'DE', state: 'Bavaria', city: 'Munich', organization: 'Foo Bar', email: 'foo@bar.com' }
+      - name: fooboar.local
+        subject:
+           C: DE
+           ST: Bavaria
+           L: Munich
+           O: Foo Bar Inc
+           CN: foobar.local
+           emailAddress: null@foobar.local
     nginx_sites:
       - id: foobar
         add_webroot: yes
@@ -28,3 +35,8 @@
         auth:
           name: Foo Bar
           file: foobar
+    nginx_worker_processes: 1
+    nginx_remove_default: yes
+    # do not start service as we're running in docker
+    nginx_service_state: stopped
+    nginx_service_enabled: no

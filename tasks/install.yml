@@ -1,11 +1,22 @@
 ---
 
+- name: Installing dependencies
+  apt:
+    pkg: "{{ nginx_dependencies }}"
+    state: present
+
+- name: Importing APT key
+  apt_key:
+    id: "{{ nginx_repo_key }}"
+    keyserver: keyserver.ubuntu.com
+    state: present
+
 - name: Adding APT repository
   apt_repository:
     repo: "{{ nginx_repo }}"
     update_cache: yes
 
 - name: Installing packages
-  apt:
-    pkg: "{{ nginx_package }}"
+  package:
+    name: "{{ nginx_package }}"
     state: present
