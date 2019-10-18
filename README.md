@@ -75,8 +75,14 @@ Here is a list of all the default variables for this role, which are also availa
 #     append: ''
 #
 
+# dependencies packages to install package
+nginx_dependencies:
+  - ca-certificates
+  - gnupg2
 # apt repository
 nginx_repo: "deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release }} nginx"
+# apt repository key
+nginx_repo_key: ABF5BD827BD9BF62
 # package name (version)
 nginx_package: nginx
 # run as a less privileged user for security reasons.
@@ -116,7 +122,6 @@ These are the handlers that are defined in `handlers/main.yml`.
   service: name=nginx state=restarted
   when: nginx_service_state != 'stopped'
 
-
 - name: reload nginx
   service: name=nginx state=reloaded
   when: nginx_service_state != 'stopped'
@@ -145,7 +150,7 @@ This is an example playbook:
 ---
 
 - hosts: all
-  become: true
+  become: yes
   roles:
     - weareinteractive.apt
     - weareinteractive.openssl
