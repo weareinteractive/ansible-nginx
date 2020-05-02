@@ -65,9 +65,10 @@ Here is a list of all the default variables for this role, which are also availa
 #     aliases: []
 #     redirects: []
 #     ssl:
+#       cert_path: /etc/letsencrypt/live/sub.example.com
 #       port: 443
-#       key_name: mykey
-#       cert_name: mycert
+#       key_name: mykey.key
+#       cert_name: mycert.crt
 #     rules: []
 #     auth:
 #       name: foo
