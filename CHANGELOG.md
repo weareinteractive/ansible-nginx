@@ -1,3 +1,18 @@
+<a name="2.0.0"></a>
+## 2.0.0 (2020-05-04)
+
+
+#### Features
+
+*   move files to fit conventions ([fc20b264](https://github.com/weareinteractive/ansible-nginx/commit/fc20b2640014d08192c8b0000e5898de4969bf7b))
+
+#### Breaking changes
+
+In order to upgrade from 1.x to 2.x you need to:
+
+* add extensions to `nginx_sites[].ssl.key_name` and `nginx_sites[].ssl.cert_name` i.e. `server.key`
+* in case of custom rules, change the location from `files/etc-nginx-rules` to `files/etc/nginx/rules`
+
 <a name="1.5.0"></a>
 ## 1.5.0 (2019-10-18)
 
