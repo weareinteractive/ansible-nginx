@@ -65,10 +65,11 @@ Here is a list of all the default variables for this role, which are also availa
 #     aliases: []
 #     redirects: []
 #     ssl:
-#       cert_path: /etc/letsencrypt/live/sub.example.com
 #       port: 443
 #       key_name: mykey.key
+#       key_path: path/to/key
 #       cert_name: mycert.crt
+#       cert_path: path/to/cert
 #     rules: []
 #     auth:
 #       name: foo
@@ -177,8 +178,8 @@ This is an example playbook:
         add_webroot: yes
         name: foobar.local
         ssl:
-          key_name: foobar.local
-          cert_name: foobar.local
+          key_name: foobar.local.key
+          cert_name: foobar.local.crt
         rules:
           - gzip
           - security
