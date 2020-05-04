@@ -12,8 +12,10 @@
 #     redirects: []
 #     ssl:
 #       port: 443
-#       key_name: mykey
-#       cert_name: mycert
+#       key_name: mykey.key
+#       key_path: path/to/key
+#       cert_name: mycert.crt
+#       cert_path: path/to/cert
 #     rules: []
 #     auth:
 #       name: foo
