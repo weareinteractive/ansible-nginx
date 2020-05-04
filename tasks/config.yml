@@ -2,7 +2,7 @@
 
 - name: Configuring nginx
   template:
-    src: etc-nginx-nginx.conf.j2
+    src: etc/nginx/nginx.conf.j2
     dest: /etc/nginx/nginx.conf
     owner: root
     group: root
@@ -24,7 +24,7 @@
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
-  when: "{{ nginx_remove_default }}"
+  when: nginx_remove_default
   notify: reload nginx
 
 - name: Removing default host
@@ -34,13 +34,13 @@
   with_items:
     - /etc/nginx/sites-available/default
     - /var/www/html
-  when: "{{ nginx_remove_default }}"
+  when: nginx_remove_default
 
 - name: Adding rules
   copy:
-    src: etc-nginx-rules/
+    src: etc/nginx/rules/
     dest: /etc/nginx/rules/
     owner: root
     group: root
     mode: "0644"
-  when: "{{ nginx_add_rules }}"
+  when: nginx_add_rules

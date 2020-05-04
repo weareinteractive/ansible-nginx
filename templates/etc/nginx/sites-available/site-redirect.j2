@@ -11,8 +11,8 @@ server {
 
   include rules/ssl.conf;
 
-  ssl_certificate {{ item.ssl.cert_path |default(openssl_certs_path) }}/{{ item.ssl.cert_name|default('server.crt') }};
-  ssl_certificate_key {{ item.ssl.cert_path |default(openssl_keys_path) }}/{{ item.ssl.key_name|default('server.key') }};
+  ssl_certificate {{ item.ssl.cert_path|default(openssl_certs_path) }}/{{ item.ssl.cert_name|default('server.crt') }};
+  ssl_certificate_key {{ item.ssl.key_path|default(openssl_keys_path) }}/{{ item.ssl.key_name|default('server.key') }};
   {% endif %}
 
   # --- redirects --------------------------------------------------------------

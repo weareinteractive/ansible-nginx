@@ -27,8 +27,8 @@
         add_webroot: yes
         name: foobar.local
         ssl:
-          key_name: foobar.local
-          cert_name: foobar.local
+          key_name: foobar.local.key
+          cert_name: foobar.local.crt
         rules:
           - gzip
           - security

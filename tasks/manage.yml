@@ -9,7 +9,7 @@
 
 - name: Configuring sites
   template:
-    src: "{{ item.template|default('etc-nginx-sites-available-site.j2') }}"
+    src: "{{ item.template|default('etc/nginx/sites-available/site.j2') }}"
     dest: "/etc/nginx/sites-available/{{ item.id }}"
     owner: root
     group: root

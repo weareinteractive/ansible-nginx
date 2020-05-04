@@ -12,7 +12,8 @@ lint:
 	ansible-lint .
 
 ubuntu%: TEST_DEPS+=\
-	&& apt-get update
+	&& apt-get update \
+	&& apt-get install -y python-setuptools python-openssl python-pip
 
 ubuntu18.04: dist=ubuntu-18.04
 ubuntu18.04: .run
