@@ -75,6 +75,9 @@ Here is a list of all the default variables for this role, which are also availa
 #       name: foo
 #       file: foo
 #     append: ''
+#     proxy_pass:
+#       - target: 127.0.0.1
+#       - target_port: 8000
 #
 
 # dependencies packages to install package

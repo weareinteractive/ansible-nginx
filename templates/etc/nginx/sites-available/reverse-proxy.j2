@@ -1,0 +1,46 @@
+# {{ ansible_managed }}
+
+# HTTPS terminating proxy sitting in front of webapp.
+
+# TODO: Check: Some of this file can probably be removed with no loss in functionality.
+
+# default_server on listen is required to work around bug https://github.com/certbot/certbot/issues/5817#issuecomment-391051737
+server {
+    server_name {{ item.name }}{% for value in item.aliases|default([]) %} {{ value }}{% endfor %};
+
+    return 301 https://$host$request_uri;
+
+    listen 80 ;
+    return 404;
+}
+
+server {
+    server_name {{ item.name }}{% for value in item.aliases|default([]) %} {{ value }}{% endfor %};
+
+    charset utf-8;
+    keepalive_timeout {{ nginx_keepalive_timeout }};
+    client_max_body_size 128M;
+    gzip_types text/css application/javascript text/javascript text/plain text/xml application/xml;
+    gzip_vary on;
+
+    root {{ item.webroot }};
+
+    # Letsencrypt
+    location /.well-known {
+        alias {{ item.wellknown }}/.well-known;
+    }
+
+    location / {
+        proxy_pass http://{{ item.proxy_pass.target }}:{{ item.proxy_pass.target_port }}/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    listen 443 ssl;
+    ssl_certificate {{ item.ssl.cert_path |default(openssl_certs_path) }}/{{ item.ssl.cert_name|default('server.crt') }};
+    ssl_certificate_key {{ item.ssl.cert_path |default(openssl_keys_path) }}/{{ item.ssl.key_name|default('server.key') }};
+
+}
+
