@@ -5,14 +5,17 @@
 # TODO: Check: Some of this file can probably be removed with no loss in functionality.
 
 # default_server on listen is required to work around bug https://github.com/certbot/certbot/issues/5817#issuecomment-391051737
+# TODO: make this if work
+{% if item.ssl.upgrade is defined and item.ssl.upgrade is not false %}
 server {
     server_name {{ item.name }}{% for value in item.aliases|default([]) %} {{ value }}{% endfor %};
 
     return 301 https://$host$request_uri;
 
-    listen 80 ;
+    listen {{ item.ip|default('*') }}:{{item.port|default(80)}};
     return 404;
 }
+{% endif %}
 
 server {
     server_name {{ item.name }}{% for value in item.aliases|default([]) %} {{ value }}{% endfor %};
@@ -22,8 +25,6 @@ server {
     client_max_body_size 128M;
     gzip_types text/css application/javascript text/javascript text/plain text/xml application/xml;
     gzip_vary on;
-
-    root {{ item.webroot }};
 
     # Letsencrypt
     location /.well-known {
@@ -36,6 +37,9 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        {% for value in item.rules %}
+        proxy_set_header {{ value }}
+        {% endfor %}
     }
 
     listen 443 ssl;
