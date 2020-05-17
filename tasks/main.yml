@@ -23,7 +23,7 @@
     - nginx-manage
 
 - import_tasks: proxies.yml
-  when: nginx_proxies | length
+  when: nginx_proxies
   tags:
     - web
     - nginx

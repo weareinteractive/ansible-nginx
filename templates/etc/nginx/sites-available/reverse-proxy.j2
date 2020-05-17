@@ -2,17 +2,17 @@
 
 # HTTPS terminating proxy sitting in front of webapp.
 
-# TODO: Check: Some of this file can probably be removed with no loss in functionality.
-
 # default_server on listen is required to work around bug https://github.com/certbot/certbot/issues/5817#issuecomment-391051737
-# TODO: make this if work
-{% if item.ssl.upgrade is defined and item.ssl.upgrade is not false %}
+{% if item.ssl.upgrade is defined() %}
 server {
     server_name {{ item.name }}{% for value in item.aliases|default([]) %} {{ value }}{% endfor %};
 
     return 301 https://$host$request_uri;
 
     listen {{ item.ip|default('*') }}:{{item.port|default(80)}};
+
+    access_log /var/log/nginx/{{ item.id }}-access-http.log;
+    error_log /var/log/nginx/{{ item.id }}-error-http.log;
     return 404;
 }
 {% endif %}
@@ -37,14 +37,19 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        {% for value in item.rules %}
-        proxy_set_header {{ value }}
-        {% endfor %}
+        {% if item.extra_headers is defined() %}
+          {% for value in item.extra_headers %}
+          proxy_set_header {{ value }}
+          {% endfor %}
+        {% endif %}
     }
 
     listen 443 ssl;
     ssl_certificate {{ item.ssl.cert_path |default(openssl_certs_path) }}/{{ item.ssl.cert_name|default('server.crt') }};
     ssl_certificate_key {{ item.ssl.cert_path |default(openssl_keys_path) }}/{{ item.ssl.key_name|default('server.key') }};
+
+    access_log /var/log/nginx/{{ item.id }}-access-https.log;
+    error_log /var/log/nginx/{{ item.id }}-error-https.log;
 
 }
 

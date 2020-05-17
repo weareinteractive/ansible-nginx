@@ -93,8 +93,8 @@ Here is a list of all the default variables for this role, which are also availa
 #       cert_name: mycert.crt
 #       cert_path: path/to/cert
 #     proxy_pass:
-#       - target: 127.0.0.1
-#       - target_port: 8000
+#       target: 127.0.0.1
+#       target_port: 8000
 #     extra_headers: []
 
 
