@@ -22,6 +22,15 @@
     - manage
     - nginx-manage
 
+- import_tasks: proxies.yml
+  when: nginx_proxies
+  tags:
+    - web
+    - nginx
+    - manage
+    - nginx-manage
+    - proxies
+
 - import_tasks: service.yml
   tags:
     - web

@@ -77,6 +77,27 @@ Here is a list of all the default variables for this role, which are also availa
 #     append: ''
 #
 
+# nginx_proxies:
+#   - id: foo (required)
+#     name: foo.com (required)
+#     aliases: []
+#     ip: '*'
+#     port: 80
+#     state: present
+#     template: path/to/template.j2
+#     wellknown: folder which .well-known sits within (required)
+#     ssl:
+#       upgrade: yes
+#       key_name: mykey.key
+#       key_path: path/to/key
+#       cert_name: mycert.crt
+#       cert_path: path/to/cert
+#     proxy_pass:
+#       target: 127.0.0.1
+#       target_port: 8000
+#     extra_headers: []
+
+
 # dependencies packages to install package
 nginx_dependencies:
   - ca-certificates
