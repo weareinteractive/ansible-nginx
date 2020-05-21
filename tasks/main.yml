@@ -14,22 +14,23 @@
     - config
     - nginx-config
 
-- import_tasks: manage.yml
+- import_tasks: manage-sites.yml
   when: nginx_sites | length
   tags:
     - web
     - nginx
     - manage
     - nginx-manage
+    - nginx-manage-sites
 
-- import_tasks: proxies.yml
-  when: nginx_proxies
+- import_tasks: manage-proxies.yml
+  when: nginx_proxies | length
   tags:
     - web
     - nginx
     - manage
     - nginx-manage
-    - proxies
+    - nginx-manage-proxies
 
 - import_tasks: service.yml
   tags:

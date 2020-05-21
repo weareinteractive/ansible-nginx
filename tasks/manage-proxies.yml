@@ -2,7 +2,7 @@
 
 - name: Configuring proxies
   template:
-    src: "{{ item.template|default('etc/nginx/sites-available/reverse-proxy.j2') }}"
+    src: "{{ item.template|default('etc/nginx/sites-available/proxy.j2') }}"
     dest: "/etc/nginx/sites-available/{{ item.id }}"
     owner: root
     group: root
