@@ -26,5 +26,5 @@
     state: absent
   when: item.state is defined and item.state == 'absent'
   with_items: "{{ nginx_proxies }}"
-  notify: restart nginx
+  notify: reload nginx
 
