@@ -14,27 +14,63 @@
           - { name: foobar, password: foobar }
     openssl_generate_csr: yes
     openssl_self_signed:
-      - name: fooboar.local
+      - name: secure.local
         subject:
            C: DE
            ST: Bavaria
            L: Munich
            O: Foo Bar Inc
-           CN: foobar.local
-           emailAddress: null@foobar.local
+           CN: secure.local
+           emailAddress: null@secure.local
+      - name: secure-proxy.local
+        subject:
+           C: DE
+           ST: Bavaria
+           L: Munich
+           O: Foo Bar Inc
+           CN: secure-proxy.local
+           emailAddress: null@secure-proxy.local
     nginx_sites:
-      - id: foobar
+      - id: basic
         add_webroot: yes
-        name: foobar.local
-        ssl:
-          key_name: foobar.local.key
-          cert_name: foobar.local.crt
-        rules:
-          - gzip
-          - security
+        name: basic.local
+      - id: auth
+        add_webroot: yes
+        name: auth.local
         auth:
           name: Foo Bar
           file: foobar
+      - id: rules
+        add_webroot: yes
+        name: rules.local
+        rules:
+          - gzip
+          - expires
+          - security
+      - id: redirects
+        add_webroot: yes
+        name: redirects.local
+        redirects:
+          - redirects-a.local
+          - redirects-b.local
+      - id: secure
+        add_webroot: yes
+        name: secure.local
+        ssl:
+          key_name: secure.local.key
+          cert_name: secure.local.crt
+    nginx_proxies:
+      - id: basic-proxy
+        name: basic-proxy.local
+        proxy:
+          pass: http://basic.local:80
+      - id: secure-proxy
+        name: secure-proxy.local
+        proxy:
+          pass: http://basic.local:80
+        ssl:
+          key_name: secure-proxy.local.key
+          cert_name: secure-proxy.local.crt
     nginx_worker_processes: 1
     nginx_remove_default: yes
     # do not start service as we're running in docker
